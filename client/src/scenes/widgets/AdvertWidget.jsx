@@ -34,45 +34,16 @@ export default function RecipeReviewCard() {
 
   return (
     <Card sx={{ maxWidth: 345, borderRadius: "14px" }}>
-      <CardHeader
-        avatar={
-          <img
-            src="../../../../henady.jpg" // Adjust the path as necessary
-            alt="V.Connct Logo"
-            style={{ borderRadius: "50%", width: "40px", height: "40px" }} // Style to mimic Avatar
-          />
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title="HALS"
-        subheader="September 14, 2016"
-      />
+  <CardContent>
+  <img
+    src="../../../gaza.jpg"
+    alt="gaza"
+    style={{ width: "100%", borderRadius: "14px" }} 
+  />
+</CardContent>
+
       <CardContent>
-        <video
-          style={{ width: "100%", borderRadius: "14px" }} // Make video responsive and rounded
-          controls
-        >
-          <source src="../../../hals.mp4" type="video/mp4" />{" "}
-          {/* Adjust the path as necessary */}
-          Your browser does not support the video tag.
-        </video>
-      </CardContent>
-      <CardContent>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Introducing the hottest new track of the season! “Rhythm of the Night”
-          is here to take you on an unforgettable musical journey. Feel the
-          pulsating beats and catchy melodies that will have you dancing from
-          dusk till dawn. This track is not just a song; it's an experience that
-          captures the essence of summer nights and unforgettable memories. With
-          its vibrant sound and relatable lyrics, “Rhythm of the Night” promises
-          to be your new anthem. Whether you're at a party or just chilling with
-          friends, this song is bound to get everyone in the mood. Don’t miss
-          out on the chance to be part of the musical revolution! Stream it now
-          on all major platforms and let the rhythm take control!
-        </Typography>
+       
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
@@ -80,7 +51,6 @@ export default function RecipeReviewCard() {
         </IconButton>
 
         <IconButton aria-label="share">
-          <ShareIcon />
         </IconButton>
         <ExpandMore
           expand={expanded}
@@ -93,31 +63,16 @@ export default function RecipeReviewCard() {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography sx={{ marginBottom: 2 }}>Method:</Typography>
-          <Typography sx={{ marginBottom: 2 }}>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and
-            set aside for 10 minutes.
+          <Typography variant="h6" sx={{ marginBottom: 2 }}>
+             Remembering Palestine
           </Typography>
           <Typography sx={{ marginBottom: 2 }}>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet
-            over medium-high heat. Add chicken, shrimp, and chorizo, and cook,
-            stirring occasionally until lightly browned, 6 to 8 minutes.
-            Transfer shrimp to a large plate and set aside, leaving chicken and
-            chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes,
-            onion, salt and pepper, and cook, stirring often until thickened and
-            fragrant, about 10 minutes. Add saffron broth and remaining 4 1/2
-            cups chicken broth; bring to a boil.
+          ✊ In this relentless war against the ruthless occupying enemy, the people of Gaza stand as a symbol of unwavering courage and sacrifice. Each day, they face unimaginable hardships, yet their spirit remains unbroken. The resistance bravely strikes back, inflicting losses on the oppressor while protecting their land, the sacred Al-Aqsa Mosque, and the honor of all Muslims. This struggle is not just for survival; it is a fierce battle for dignity, freedom, and the rightful return to their homeland. The fight of the Palestinian people is a fight for the honor of Islam and all Muslims worldwide. The world must not turn a blind eye to their plight, for their fight is a fight for justice, humanity, and the sanctity of our faith.          </Typography>
+          <Typography sx={{ marginBottom: 2 }}>
+            🕌 Jerusalem, the heart of Palestine, is home to Al-Aqsa Mosque, the third holiest site in Islam. It symbolizes unity, peace, and the centuries-old history of the region.
           </Typography>
           <Typography sx={{ marginBottom: 2 }}>
-            Add rice and stir very gently to distribute. Top with artichokes and
-            peppers, and cook without stirring, until most of the liquid is
-            absorbed, 15 to 18 minutes. Reduce heat to medium-low, add reserved
-            shrimp and mussels, tucking them down into the rice, and cook again
-            without stirring, until mussels have opened and rice is just tender,
-            5 to 7 minutes more. (Discard any mussels that don&apos;t open.)
-          </Typography>
-          <Typography>
-            Set aside off the heat to let rest for 10 minutes, and then serve.
+            ✊ As we enjoy our lives, let's take a moment to remember the ongoing hardships in Gaza and Palestine, and stand in solidarity with those who fight for their land and dignity.
           </Typography>
         </CardContent>
       </Collapse>
