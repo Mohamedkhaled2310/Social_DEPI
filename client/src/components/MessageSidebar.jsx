@@ -3,8 +3,8 @@ import { Box, Typography, IconButton, Menu, MenuItem } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions"; // Emoji icon
-import EmojiPicker from "emoji-picker-react"; // Emoji picker library
+import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
+import EmojiPicker from "emoji-picker-react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setMessages, addMessage, deleteMessage } from "../state/index";
@@ -18,13 +18,11 @@ const MessageSidebar = ({ selectedFriend, handleClose, userId }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const emojiPickerRef = useRef(null);
-  const messagesEndRef = useRef(null); // Ref for scrolling to the last message
+  const messagesEndRef = useRef(null);
 
-  // State for the delete menu
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedMessageId, setSelectedMessageId] = useState(null);
 
-  // Function to send a message
   const handleSendMessage = async () => {
     if (message.trim()) {
       const newMessage = {
@@ -35,7 +33,7 @@ const MessageSidebar = ({ selectedFriend, handleClose, userId }) => {
 
       try {
         const response = await axios.post(
-          "http://localhost:3001/messages/send",
+          "https://mohamed-710-social-depi.vercel.app/messages/send",
           newMessage,
           {
             headers: {
@@ -53,11 +51,10 @@ const MessageSidebar = ({ selectedFriend, handleClose, userId }) => {
     }
   };
 
-  // Function to fetch messages
   const fetchMessages = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/messages/${userId}/${selectedFriend._id}`,
+        "https://mohamed-710-social-depi.vercel.app/messages/${userId}/${selectedFriend._id}",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -73,13 +70,16 @@ const MessageSidebar = ({ selectedFriend, handleClose, userId }) => {
 
   const handleDeleteMessage = async (messageId) => {
     try {
-      await axios.delete(`http://localhost:3001/messages/${messageId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.delete(
+        "https://mohamed-710-social-depi.vercel.app/messages/${messageId}",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       dispatch(deleteMessage(messageId));
-      setAnchorEl(null); // Close the menu after deletion
+      setAnchorEl(null);
     } catch (error) {
       console.error("Error deleting message:", error);
     }
@@ -100,7 +100,6 @@ const MessageSidebar = ({ selectedFriend, handleClose, userId }) => {
   }, [selectedFriend]);
 
   useEffect(() => {
-    // Scroll to the last message whenever messages change
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
@@ -108,7 +107,6 @@ const MessageSidebar = ({ selectedFriend, handleClose, userId }) => {
     setMessage((prevMessage) => prevMessage + emojiObject.emoji);
   };
 
-  // Close emoji picker on click outside the box
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -125,6 +123,14 @@ const MessageSidebar = ({ selectedFriend, handleClose, userId }) => {
     };
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
   return (
     <Box
       sx={{
@@ -133,7 +139,7 @@ const MessageSidebar = ({ selectedFriend, handleClose, userId }) => {
         top: 1,
         bottom: 1,
         width: { xs: "100vw", md: "400px" },
-        height: "100vh", // Make sidebar full height
+        height: "100vh",
         backgroundColor: "#00000080",
         backdropFilter: "blur(10px)",
         color: "white",
@@ -168,7 +174,7 @@ const MessageSidebar = ({ selectedFriend, handleClose, userId }) => {
       <Box
         sx={{
           flexGrow: 1,
-          overflowY: "auto", // Only the messages container should scroll
+          overflowY: "auto",
           padding: "0.77rem",
           backgroundColor: "transparent",
           borderRadius: "8px",
@@ -224,7 +230,6 @@ const MessageSidebar = ({ selectedFriend, handleClose, userId }) => {
                     onClick={(event) => handleMenuClick(event, message._id)}
                   >
                     <MoreHorizIcon />
-                    {/* تأكد من ضبط العرض والارتفاع للأيقونة */}
                   </IconButton>
                 )}
 
@@ -258,10 +263,10 @@ const MessageSidebar = ({ selectedFriend, handleClose, userId }) => {
             </Box>
           ))
         )}
-        {/* This box is for scrolling */}
         <div ref={messagesEndRef} />
       </Box>
 
+      {/* Input and Emoji Picker */}
       <Box
         sx={{
           display: "flex",
@@ -269,6 +274,9 @@ const MessageSidebar = ({ selectedFriend, handleClose, userId }) => {
           padding: "0rem",
           bgcolor: "#333333",
           borderRadius: "5px",
+          position: "sticky",
+          bottom: 0, // Make it stick to the bottom
+          zIndex: 1000,
         }}
       >
         <IconButton
@@ -280,13 +288,8 @@ const MessageSidebar = ({ selectedFriend, handleClose, userId }) => {
 
         {showEmojiPicker && (
           <Box
-            sx={{
-              position: "absolute",
-              bottom: "60px",
-              right: "10px",
-              zIndex: 1300,
-            }}
             ref={emojiPickerRef}
+            sx={{ position: "absolute", bottom: "60px", zIndex: 1000 }}
           >
             <EmojiPicker onEmojiClick={handleEmojiClick} />
           </Box>
@@ -299,19 +302,17 @@ const MessageSidebar = ({ selectedFriend, handleClose, userId }) => {
           onKeyDown={(e) => {
             if (e.key === "Enter") handleSendMessage();
           }}
+          placeholder="Type a message..."
           style={{
             flexGrow: 1,
-            padding: "0.5rem",
             border: "none",
+            padding: "0.5rem",
             borderRadius: "5px",
-            marginLeft: "0.5rem",
+            outline: "none",
             backgroundColor: "transparent",
             color: "#FFFFFF",
-            outline: "none",
           }}
-          placeholder="Type a message..."
         />
-
         <IconButton
           onClick={handleSendMessage}
           disabled={!message}
@@ -324,7 +325,7 @@ const MessageSidebar = ({ selectedFriend, handleClose, userId }) => {
         </IconButton>
       </Box>
 
-      {/* Menu for deleting messages */}
+      {/* Message Deletion Menu */}
       <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
@@ -340,6 +341,7 @@ const MessageSidebar = ({ selectedFriend, handleClose, userId }) => {
             handleDeleteMessage(selectedMessageId);
             handleMenuClose();
           }}
+      
         >
           Delete Message
         </MenuItem>
@@ -348,4 +350,4 @@ const MessageSidebar = ({ selectedFriend, handleClose, userId }) => {
   );
 };
 
-export default MessageSidebar;
+export default MessageSidebar;

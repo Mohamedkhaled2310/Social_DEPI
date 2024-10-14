@@ -274,17 +274,17 @@ const PostWidget = ({
       </Box>
 
       <Typography
-        color={palette.neutral.dark}
         sx={{
           mt: "1.3rem",
           ml: "30px",
           fontSize: "20px",
           fontWeight: 400,
           direction: /\p{Script=Arabic}/u.test(description) ? "rtl" : "ltr", // تحديد الاتجاه حسب اللغة
+          wordWrap: "break-word", // كسر النص إلى سطر جديد إذا تجاوز العرض
         }}
       >
         {description}
-      </Typography>
+      </Typography>
 
       {picturePath && !videoPath && (
         <img

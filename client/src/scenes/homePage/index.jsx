@@ -30,39 +30,41 @@ const HomePage = () => {
   }
 
   return (
-    <Box>
-      <Navbar />
-      <Box
-        width="100%"
-        padding="2rem 6%"
-        display={isNonMobileScreens ? "flex" : "block"}
-        gap="0.5rem"
-        justifyContent="space-between"
-      >
-        {/* Left Column */}
-        <Box flexBasis={isNonMobileScreens ? "26%" : "100%"}>
-          <UserWidget userId={_id} picturePath={picturePath} />
-        </Box>
-
-        {/* Center Column */}
-        <Box
-          flexBasis={isNonMobileScreens ? "42%" : "100%"}
-          mt={!isNonMobileScreens && "2rem"}
-        >
-          <MyPostWidget picturePath={picturePath} />
-          <PostsWidget userId={_id} />
-        </Box>
-
-        {/* Right Column (Shown only on non-mobile screens) */}
-        {isNonMobileScreens && (
-          <Box flexBasis="26%">
-            <AdvertWidget />
-            <Box margin="2rem 0" />
-            <FriendListWidget userId={_id} />
-          </Box>
-        )}
-      </Box>
+<Box>
+  <Navbar />
+  <Box
+    width="100%"
+    padding="2rem 6%"
+    display={isNonMobileScreens ? "flex" : "block"}
+    gap="0.5rem"
+    justifyContent="space-between"
+  >
+    {/* Left Column */}
+    <Box flexBasis={isNonMobileScreens ? "26%" : "100%"}>
+      <UserWidget userId={_id} picturePath={picturePath} />
     </Box>
+
+    {/* Center Column */}
+    <Box
+      flexBasis={isNonMobileScreens ? "42%" : "100%"}
+      mt={!isNonMobileScreens && "2rem"}
+      maxWidth={isNonMobileScreens ? "600px" : "100%"} // تحديد حد أقصى للعرض
+      width="100%"
+    >
+      <MyPostWidget picturePath={picturePath} />
+      <PostsWidget userId={_id} />
+    </Box>
+
+    {/* Right Column (Shown only on non-mobile screens) */}
+    {isNonMobileScreens && (
+      <Box flexBasis="26%">
+        <AdvertWidget />
+        <Box margin="2rem 0" />
+        <FriendListWidget userId={_id} />
+      </Box>
+    )}
+  </Box>
+</Box>
   );
 };
 

@@ -46,7 +46,7 @@ const ProfilePage = () => {
   if (!user) return null;
 
   return (
-    <Box>
+<Box>
       <Navbar />
       <Box
         width="100%"
@@ -55,23 +55,30 @@ const ProfilePage = () => {
         gap="1rem"
         justifyContent="space-between"
       >
+        {/* Left Column */}
         <Box
           flexBasis={isNonMobileScreens ? "26%" : undefined}
           display="flex"
           flexDirection="column"
           marginBottom="2.5rem"
         >
-          <UserWidget userId={userId} picturePath={user.picturePath} />{" "}
+          <UserWidget userId={userId} picturePath={user.picturePath} />
         </Box>
+
+        {/* Center Column */}
         <Box
           flexBasis={isNonMobileScreens ? "42%" : undefined}
           display="flex"
           flexDirection="column"
           gap="0.5rem"
+          maxWidth={isNonMobileScreens ? "600px" : "100%"} // تحديد حد أقصى للعرض
+          width="100%"
         >
           <MyPostWidget picturePath={user.picturePath} />
           <PostsWidget userId={userId} isProfile />
         </Box>
+
+        {/* Right Column */}
         <Box
           flexBasis={isNonMobileScreens ? "26%" : undefined}
           display="flex"
@@ -80,7 +87,7 @@ const ProfilePage = () => {
           <FriendListWidget userId={userId} />
         </Box>
       </Box>
-    </Box>
+    </Box>
   );
 };
 
