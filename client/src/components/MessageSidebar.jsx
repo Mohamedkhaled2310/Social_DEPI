@@ -33,7 +33,7 @@ const MessageSidebar = ({ selectedFriend, handleClose, userId }) => {
 
       try {
         const response = await axios.post(
-          "https://mohamed-710-social-depi.vercel.app/messages/send",
+          "http://localhost:3001/messages/send",
           newMessage,
           {
             headers: {
@@ -54,7 +54,7 @@ const MessageSidebar = ({ selectedFriend, handleClose, userId }) => {
   const fetchMessages = async () => {
     try {
       const response = await axios.get(
-        "https://mohamed-710-social-depi.vercel.app/messages/${userId}/${selectedFriend._id}",
+        "http://localhost:3001/messages/${userId}/${selectedFriend._id}",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -71,7 +71,7 @@ const MessageSidebar = ({ selectedFriend, handleClose, userId }) => {
   const handleDeleteMessage = async (messageId) => {
     try {
       await axios.delete(
-        "https://mohamed-710-social-depi.vercel.app/messages/${messageId}",
+        "http://localhost:3001/messages/${messageId}",
         {
           headers: {
             Authorization: `Bearer ${token}`,
